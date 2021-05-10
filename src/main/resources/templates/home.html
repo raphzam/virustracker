@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <h1>Coronavirus Tracker Application</h1>
+    <p>This application lists the current number of cases reported across the globe.</p>
+
+    <div class="jumbotron">
+        <h1 class="display-4" th:text="${#numbers.formatDecimal(totalReportedCases,3,'COMMA',2,'POINT')}">[[${totalReportedCases}]]</h1>
+        <p class="lead">Total cases reported as of today</p>
+    </div>
+
+    <!--<p> [[${testName}]]</p>-->
+    <!--<p th:text="${testName}"></p>-->
+    <table class="table table-dark">
+        <tr>
+            <th>State</th>
+            <th>Country</th>
+            <th>Total cases repoted</th>
+            <th>Changes since last day</th>
+        </tr>
+        <tr th:each="location : ${locationStats}">
+            <td th:text="${location.state}"></td>
+            <td th:text="${location.country}"></td>
+            <td th:text="${location.latestTotalCases}">0</td>
+            <td th:text="${location.diffFromPrevDay}">0</td>
+        </tr>
+    </table>
+</div>
+
+
+</body>
+</html>
